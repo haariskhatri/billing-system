@@ -1,0 +1,35 @@
+.invoice-page {
+  background-color: #F0F7F6;
+}
+
+.date-section {
+  background-color: #fff;
+  border: 1px solid #d2dad8;
+  padding: 40px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.date {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d2dad8;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.due-date {
+  padding: 7px;
+  border: 0;
+  background-color: #F0F7F6;
+}
+
+.bill-inner input {
+  border: 0;
+  padding: 7px 20px;
+  background-color: #F0F7F6;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
