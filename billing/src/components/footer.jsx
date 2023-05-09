@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Footer = () => {
+const Footer = (props) => {
+
+    const [note, setnote] = useState('');
+
+    const noteshandler = (event) => {
+        event.preventDefault();
+        const newnote = event.target.value;
+        setnote(newnote);
+        props.notehandler(newnote);
+    }
+
+
     return (
         <>
             <div className="row">
                 <div className="bill-footer">
                     <h6>Notes</h6>
-                    <input type="text" placeholder="Notes" />
+                    <input type="text" onChange={noteshandler} placeholder="Notes" />
 
                 </div>
 

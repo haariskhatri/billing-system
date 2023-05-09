@@ -11,6 +11,18 @@ import ReviewInvoice from './components/reviewinvoice'
 
 function App() {
 
+  const [discount, setdiscount] = useState('');
+  const [note, setnotes] = useState('');
+
+  const notehandler = (value) => {
+    setnotes(value);
+    console.log(note);
+  }
+
+  const discounthandler = (_discount) => {
+    setdiscount(_discount);
+  }
+
   return (
     <>
       <div className="invoice-page">
@@ -22,7 +34,7 @@ function App() {
                 <DateBar />
                 <AddressBar />
                 <Billcard />
-                <Footer />
+                <Footer notehandler={notehandler} />
               </div>
             </div>
             <div className="col-md-3 position-relative">
@@ -33,6 +45,7 @@ function App() {
               </div>
               <div className="review-details">
                 <ReviewInvoice />
+                <h6>{note}</h6>
               </div>
             </div>
           </div>
