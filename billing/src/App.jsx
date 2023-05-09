@@ -5,9 +5,11 @@ import './App.css'
 import Navbar from './components/navbar'
 import DateBar from './components/datebar'
 import AddressBar from './components/addressbar'
+import Billcard from './components/billcard'
+import Footer from './components/footer'
+import ReviewInvoice from './components/reviewinvoice'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -19,12 +21,19 @@ function App() {
               <div className="date-section">
                 <DateBar />
                 <AddressBar />
+                <Billcard />
+                <Footer />
               </div>
-
-
             </div>
-            <div className="col-md-3">
-              5
+            <div className="col-md-3 position-relative">
+              <div className="review-section">
+                <button className="review-button">
+                  Review Invoice
+                </button>
+              </div>
+              <div className="review-details">
+                <ReviewInvoice />
+              </div>
             </div>
           </div>
         </div>

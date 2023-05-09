@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Logo from '../public/images/logo.png'
+
 
 
 const DateBar = () => {
@@ -25,6 +27,7 @@ const DateBar = () => {
                     <p><b>Current Date : </b> {date} </p>
                     <p><b>Due Date : </b> <input type="date" value={duedate} className="due-date" onChange={duedatehandler} /></p>
                 </div>
+                <img src={Logo} />
                 <div className="invoice-number">
                     <p><b>Invoice Number : </b> {invoiceNumber}</p>
                 </div>
