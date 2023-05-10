@@ -2,13 +2,11 @@ import React, { useState } from "react";
 
 const Footer = (props) => {
 
-    const [note, setnote] = useState('');
 
     const noteshandler = (event) => {
         event.preventDefault();
         const newnote = event.target.value;
-        setnote(newnote);
-        props.notehandler(newnote);
+        props.notehandler('ItemNote', newnote);
     }
 
 

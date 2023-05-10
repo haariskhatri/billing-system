@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -11,17 +11,44 @@ import ReviewInvoice from './components/reviewinvoice'
 
 function App() {
 
-  const [discount, setdiscount] = useState('');
-  const [note, setnotes] = useState('');
+  // const [items, setitems] = useState([]);
 
-  const notehandler = (value) => {
-    setnotes(value);
-    console.log(note);
-  }
+  // const handleBillchange = (field, value) => {
+  //   setbill((prevstate) => ({
+  //     ...prevstate, [field]: value
+  //   }))
+  // }
 
-  const discounthandler = (_discount) => {
-    setdiscount(_discount);
-  }
+  // const AddNewItem = (item) => {
+  //   setitems((prevstate) => {
+  //     return [...prevstate, item]
+  //   })
+  // }
+  const [items, setItems] = useState([]);
+
+  const handleAddNew = () => {
+    const newItem = { itemName: '', itemQty: '', itemPrice: '' };
+    setItems(prevItems => [...prevItems, newItem]);
+  };
+
+  const handleChange = (event, index) => {
+    const { name, value } = event.target;
+    const updatedItems = [...items];
+    updatedItems[index][name] = value;
+    setItems(updatedItems);
+  };
+
+  const handleRemove = (index) => {
+    setItems(prevItems => prevItems.filter((_, i) => i !== index));
+  };
+
+
+  // const handleItemchange = (field, value) => {
+  //   setitems((prevstate) => ({
+  //     ...prevstate, [field]: value
+  //   }))
+  // }
+
 
   return (
     <>
@@ -33,8 +60,8 @@ function App() {
               <div className="date-section">
                 <DateBar />
                 <AddressBar />
-                <Billcard />
-                <Footer notehandler={notehandler} />
+                <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} />
+                <Footer />
               </div>
             </div>
             <div className="col-md-3 position-relative">
@@ -45,7 +72,7 @@ function App() {
               </div>
               <div className="review-details">
                 <ReviewInvoice />
-                <h6>{note}</h6>
+
               </div>
             </div>
           </div>

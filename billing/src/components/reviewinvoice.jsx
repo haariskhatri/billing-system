@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 
-const ReviewInvoice = () => {
+const ReviewInvoice = (props) => {
 
-    const [discount, setdiscount] = useState('');
+
 
     const discountchangehandler = (event) => {
-        setdiscount(event.target.value);
+        event.preventDefault();
+        const givendiscount = event.target.value;
+        props.discounthandler('ItemDiscount', givendiscount);
     }
 
     return (
         <>
             <h6>Discount</h6>
-            <input type="Number" defaultValue="0.00" onChange={discountchangehandler} placeholder="Discount" />
+            <input type="Number" onChange={discountchangehandler} placeholder="Discount" />
         </>
     )
 }
