@@ -1,9 +1,57 @@
-import React from "react";
+import { React, useState } from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
 
 
-const Billcard = () => {
+const Billcard = ({ items, handleAddNew, handleChange, handleRemove }) => {
+
+
+
+    // const [items, setItems] = useState([{ itemName: '', itemQty: '', itemPrice: '' }]);
+
+    // const handleChange = (event, index) => {
+    //     const { name, value } = event.target;
+    //     const updatedItems = [...items];
+    //     updatedItems[index][name] = value;
+    //     setItems(updatedItems);
+    // };
+
+    // const handleAddNew = () => {
+    //     const newItem = { itemName: '', itemQty: '', itemPrice: '' };
+    //     setItems([...items, newItem]);
+    // };
+
+    // const handleRemove = (index) => {
+    //     const updatedItems = [...items];
+    //     updatedItems.splice(index, 1);
+    //     setItems(updatedItems);
+    // };
+
+    // const handleRemove = (index) => {
+    //     const updatedItems = [...items];
+    //     updatedItems.splice(index, 1);
+    //     setItems(updatedItems);
+    // };
+
+    // const ItemNameChangeHandler = (event) => {
+    //     const ItemName = event.target.value;
+    //     props.itemchangehandler('ItemName', ItemName);
+    // }
+
+    // const ItemQtyChangeHandler = (event) => {
+    //     const ItemQty = event.target.value;
+    //     props.itemchangehandler('ItemQty', ItemQty);
+    // }
+
+    // const ItemPriceChangeHandler = (event) => {
+    //     const ItemPrice = event.target.value;
+    //     props.itemchangehandler('ItemPrice', ItemPrice);
+    // }
+
+    // const handleAddNew = () => {
+    //     props.AddNewItem();
+    // }
+
 
     return (
         <>
@@ -27,22 +75,55 @@ const Billcard = () => {
 
                     <table className="table">
                         <thead>
-                            <th>Qty</th>
-                            <th>Item</th>
-                            <th>Price</th>
-                            <th>Action</th>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td className="item-name"><input type="text" name="item-name" placeholder="Item Name" /></td>
-                                <td><input type="number" name="item-qty" placeholder="Qty" min="0" /></td>
-                                <td><input type="number" name="item-price" placeholder="Price" /></td>
-                                <td><button><DeleteForeverIcon /></button></td>
-                            </tr>
+                            {items.map((item, index) => (
+                                <tr key={index}>
+                                    <td className="item-name">
+                                        <input
+                                            type="text"
+                                            name="itemName"
+                                            value={item.itemName}
+                                            placeholder="Item Name"
+                                            onChange={(event) => handleChange(event, index)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            name="itemQty"
+                                            value={item.itemQty}
+                                            placeholder="Qty"
+                                            min="0"
+                                            onChange={(event) => handleChange(event, index)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            name="itemPrice"
+                                            value={item.itemPrice}
+                                            placeholder="Price"
+                                            onChange={(event) => handleChange(event, index)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleRemove(index)}>
+                                            <DeleteForeverIcon />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
 
                     </table>
-                    <button className="add-button"> Add Item </button>
+                    <button onClick={handleAddNew} className="add-button"> Add Item </button>
                 </div>
 
                 <div className="subtotal-section">
@@ -56,7 +137,7 @@ const Billcard = () => {
                                     </ul>
                                 </div>
                                 <ul className="list-unstyled">
-                                    <li>Total:</li>
+                                    <li>Total: </li>
                                 </ul>
                             </div>
                         </div>
