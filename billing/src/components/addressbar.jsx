@@ -1,6 +1,11 @@
 import React from "react";
 
-const AddressBar = () => {
+const AddressBar = (props) => {
+
+
+
+
+
     return (
         <>
             <div className="address-box">
