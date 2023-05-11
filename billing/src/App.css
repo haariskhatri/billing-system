@@ -63,7 +63,7 @@ button {
 }
 
 .item-name {
-  width: 70%;
+  width: 50%;
 }
 
 .bill-top table td,
@@ -151,4 +151,8 @@ button {
   display: block;
   width: 100%;
   border-radius: 7px;
+}
+
+.serial {
+  vertical-align: middle;
 }
