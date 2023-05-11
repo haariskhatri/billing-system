@@ -3,7 +3,7 @@ import Logo from '../public/images/logo.png'
 
 
 
-const DateBar = () => {
+const DateBar = ({ invoice, setinvoice }) => {
     const [date, Setdate] = useState('');
     const [duedate, Setduedate] = useState('');
     const [invoiceNumber, SetInvoiceNumber] = useState('');
@@ -11,8 +11,9 @@ const DateBar = () => {
 
     useEffect(() => {
         const datenow = new Date().toLocaleDateString();
-        const random = Math.random();
-        SetInvoiceNumber(random);
+        const invoiceNumber = invoice;
+        SetInvoiceNumber(invoiceNumber);
+        setinvoice(invoiceNumber);
         Setdate(datenow);
     }, [])
 

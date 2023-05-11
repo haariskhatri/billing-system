@@ -8,6 +8,7 @@ import AddressBar from './components/addressbar'
 import Billcard from './components/billcard'
 import Footer from './components/footer'
 import ReviewInvoice from './components/reviewinvoice'
+import Modal from './components/modal'
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
   // }
   const [items, setItems] = useState([]);
   const [discount, setdiscount] = useState(0);
+  const [invoice, setinvoice] = useState(0);
+  const [shipping, setshipping] = useState(0);
 
 
   const handleAddNew = () => {
@@ -52,6 +55,10 @@ function App() {
     setinvoice(value);
   }
 
+  const modalchangehandler = () => {
+    setmodal(true);
+  }
+
   // const handleItemchange = (field, value) => {
   //   setitems((prevstate) => ({
   //     ...prevstate, [field]: value
@@ -61,26 +68,25 @@ function App() {
 
   return (
     <>
+
       <div className="invoice-page">
         <div className="container">
           <Navbar />
           <div className="row">
             <div className="col-md-9">
               <div className="date-section">
-                <DateBar />
+                <DateBar invoice={invoice} setinvoice={setinvoice} />
                 <AddressBar />
-                <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} discount={discount} />
+                <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} discount={discount} shipping={shipping} />
                 <Footer />
               </div>
             </div>
             <div className="col-md-3 position-relative">
               <div className="review-section">
-                <button className="review-button">
-                  Review Invoice
-                </button>
+                <Modal items={items} shipping={shipping} discount={discount} invoice={invoice + 1} />
               </div>
               <div className="review-details">
-                <ReviewInvoice discountchangehandler={handlediscountchange} />
+                <ReviewInvoice discountchangehandler={handlediscountchange} shippingchangehandler={setshipping} />
               </div>
             </div>
           </div>

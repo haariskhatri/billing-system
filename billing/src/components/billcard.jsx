@@ -3,7 +3,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
 
 
-const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount }) => {
+const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, shipping }) => {
 
 
     const calculateSubtotal = () => {
@@ -13,13 +13,27 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount })
             const itemPrice = parseFloat(item.itemPrice) || 0;
             subtotal += itemQty * itemPrice;
         });
-        return subtotal.toFixed(2);
+        return subtotal;
     };
 
     const subtotal = calculateSubtotal();
-    const discountgiven = discount || 0;
-    const total = subtotal - discountgiven;
+    const discountgiven = (discount) || 0;
+    const shippingamount = (shipping) || 0;
+    let total;
+    if (parseFloat(discountgiven)) {
+        total = (parseFloat(subtotal) + parseFloat(shippingamount) - parseFloat(discountgiven)).toFixed(2);
+    } else {
+        total = (parseFloat(subtotal) + parseFloat(shippingamount)).toFixed(2);
+    }
 
+    const getamount = (quantity, price) => {
+        if (quantity && price) {
+            return quantity * price;
+        }
+        else {
+            return 0;
+        }
+    }
 
     // const [items, setItems] = useState([{ itemName: '', itemQty: '', itemPrice: '' }]);
 
@@ -95,6 +109,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount })
                                 <th>Item</th>
                                 <th>Qty</th>
                                 <th>Price</th>
+                                <th>Amount</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -116,7 +131,6 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount })
                                             type="text"
                                             name="itemName"
                                             value={item.itemName}
-                                            placeholder="Item Name"
                                             onChange={(event) => handleChange(event, index)}
                                         />
                                     </td>
@@ -126,6 +140,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount })
                                             name="itemQty"
                                             value={item.itemQty}
                                             min="1"
+                                            placeholder="0"
                                             onChange={(event) => handleChange(event, index)}
                                         />
                                     </td>
@@ -135,9 +150,18 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount })
                                             type="number"
                                             name="itemPrice"
                                             value={item.itemPrice}
+                                            placeholder="0"
                                             onChange={(event) => handleChange(event, index)}
                                         />
                                     </td>
+                                    <td>
+                                        {parseFloat(item.itemQty) && parseFloat(item.itemPrice) ? (
+                                            item.itemQty * item.itemPrice
+                                        ) : (
+                                            0
+                                        )}
+                                    </td>
+
                                     <td>
                                         <button onClick={() => handleRemove(index)}>
                                             <DeleteForeverIcon />
@@ -159,6 +183,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount })
                                     <ul className="list-unstyled">
                                         <li>Subtotal : Rs {subtotal} </li>
                                         <li>Tax      : </li>
+                                        <li>Shipping : {shippingamount}</li>
                                         <li>Discount : Rs {discountgiven} </li>
                                     </ul>
                                 </div>

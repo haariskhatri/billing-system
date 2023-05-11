@@ -31,14 +31,32 @@ button {
   background-color: #F0F7F6;
 }
 
-.bill-inner input {
+.input-group {
+  align-items: center;
+  margin-bottom: 10px;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.input-group:has(textarea) {
+  align-items: start;
+}
+
+.bill-inner label {
+  width: 60px;
+}
+
+.bill-inner input,
+.bill-inner textarea {
   border: 0;
   padding: 7px 20px;
   background-color: #F0F7F6;
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
+  flex-grow: 1;
   border-radius: 3px;
+}
+
+.bill-inner textarea {
+  height: 120px;
 }
 
 /* BillBoard */
@@ -65,6 +83,7 @@ button {
 .item-name {
   width: 50%;
 }
+
 
 .bill-top table td,
 .bill-top table th {
@@ -119,17 +138,7 @@ button {
   margin-top: 10px;
 }
 
-.review-button {
-  position: sticky;
-  padding: 10px;
-  border: 1px solid #0a58ca;
-  border-radius: 7px;
-  background-color: #0b5ed7;
-  color: #fff;
-  width: 100%;
-  top: 20px;
-  margin-bottom: 10px;
-}
+
 
 .review-section {
   position: sticky;
@@ -155,4 +164,66 @@ button {
 
 .serial {
   vertical-align: middle;
+}
+
+/* Right Panel */
+
+.right-panel label {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.right-panel input {
+  margin-top: 3px;
+  padding: 10px;
+}
+
+/* Bill Modal */
+.bill-modal-table .modal-header {
+  background-color: #e7efed;
+
+}
+
+.bill-modal-table {
+  max-width: 800px;
+}
+
+
+.review-button {
+  position: sticky;
+  padding: 10px;
+  border: 1px solid #0a58ca;
+  border-radius: 7px;
+  background-color: #0b5ed7;
+  color: #fff;
+  width: 100%;
+  top: 20px;
+  margin-bottom: 10px;
+}
+
+.modal-amount {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-totals ul li {
+  font-weight: bold;
+  font-size: small;
+
+}
+
+.modal-totals {
+  border-bottom: 1px solid #d2dad8;
+  display: flex;
+
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+.modal-final-total {
+  font-weight: bold;
+  margin-top: 3px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
 }

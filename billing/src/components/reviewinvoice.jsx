@@ -10,10 +10,21 @@ const ReviewInvoice = (props) => {
         props.discountchangehandler(parseInt(givendiscount));
     }
 
+    const shippingchangehandler = (event) => {
+        event.preventDefault();
+        const shippingcharge = event.target.value;
+        props.shippingchangehandler(shippingcharge);
+
+    }
+
     return (
         <>
-            <h6>Discount</h6>
-            <input type="Number" onChange={discountchangehandler} placeholder="Discount" />
+            <div className="right-panel">
+                <label >Discount</label>
+                <input type="Number" onChange={discountchangehandler} placeholder="Discount" />
+                <label>Shipping</label>
+                <input type="Number" onChange={shippingchangehandler} placeholder="Shipping" />
+            </div>
         </>
     )
 }
