@@ -25,9 +25,11 @@ function App() {
   //   })
   // }
   const [items, setItems] = useState([]);
+  const [discount, setdiscount] = useState(0);
+
 
   const handleAddNew = () => {
-    const newItem = { itemName: '', itemQty: '', itemPrice: '' };
+    const newItem = { itemName: '', itemQty: '', itemPrice: '', itemBarcode: '' };
     setItems(prevItems => [...prevItems, newItem]);
   };
 
@@ -42,6 +44,13 @@ function App() {
     setItems(prevItems => prevItems.filter((_, i) => i !== index));
   };
 
+  const handlediscountchange = (value) => {
+    setdiscount(value);
+  }
+
+  const handleinvoicechange = (value) => {
+    setinvoice(value);
+  }
 
   // const handleItemchange = (field, value) => {
   //   setitems((prevstate) => ({
@@ -60,7 +69,7 @@ function App() {
               <div className="date-section">
                 <DateBar />
                 <AddressBar />
-                <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} />
+                <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} discount={discount} />
                 <Footer />
               </div>
             </div>
@@ -71,8 +80,7 @@ function App() {
                 </button>
               </div>
               <div className="review-details">
-                <ReviewInvoice />
-
+                <ReviewInvoice discountchangehandler={handlediscountchange} />
               </div>
             </div>
           </div>
