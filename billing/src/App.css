@@ -88,6 +88,7 @@ button {
 .bill-top table td,
 .bill-top table th {
   padding: 10px;
+  vertical-align: middle;
 }
 
 .bill-top table td input {
@@ -120,9 +121,40 @@ button {
 }
 
 .subtotal-parts {
-  border-bottom: 1px solid #d2dad8;
-  margin-bottom: 5px;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20 px;
+  flex-direction: column;
+}
 
+.subtotal-parts ul:not(:last-child) {
+  border-bottom: 1px solid #d2dad8;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.subtotal-parts ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subtotal-parts ul li span {
+  margin-right: 20px;
+}
+
+.subtotal-total {
+  margin-bottom: 5px;
+}
+
+.subtotal-total li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subtotal-total li span {
+  margin-right: 20px;
 }
 
 .bill-footer input {
@@ -162,9 +194,7 @@ button {
   border-radius: 7px;
 }
 
-.serial {
-  vertical-align: middle;
-}
+
 
 /* Right Panel */
 
@@ -206,16 +236,27 @@ button {
   justify-content: flex-end;
 }
 
+.modal-totals ul {
+  border-bottom: 1px solid #d2dad8;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
 .modal-totals ul li {
   font-weight: bold;
   font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
 
+.modal-totals ul li span {
+  margin-right: 20px;
 }
 
 .modal-totals {
-  border-bottom: 1px solid #d2dad8;
   display: flex;
-
   justify-content: flex-end;
   margin-right: 20px;
 }
@@ -225,5 +266,5 @@ button {
   margin-top: 3px;
   display: flex;
   justify-content: flex-end;
-  margin-right: 30px;
+  margin-right: 20px;
 }

@@ -116,7 +116,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                         <tbody>
                             {items.map((item, index) => (
                                 <tr key={index}>
-                                    <td className="serial">{index + 1}</td>
+                                    <td>{index + 1}</td>
                                     <td> {/* Barcode input field */}
                                         <input
                                             type="text"
@@ -177,19 +177,19 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
 
                 <div className="subtotal-section">
                     <div className="row justify-content-end">
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <div className="subtotal-items">
                                 <div className="subtotal-parts">
                                     <ul className="list-unstyled">
-                                        <li>Subtotal : Rs {subtotal} </li>
-                                        <li>Tax      : </li>
-                                        <li>Shipping : {shippingamount}</li>
-                                        <li>Discount : Rs {discountgiven} </li>
+                                        <li><span>Subtotal :</span> Rs.{subtotal} </li>
+                                        <li><span>Tax      :</span> </li>
+                                        <li><span>Shipping :</span> Rs.{shippingamount}</li>
+                                        <li><span>Discount :</span> Rs.{discountgiven} </li>
+                                    </ul>
+                                    <ul className="list-unstyled subtotal-total">
+                                        <li><span>Total :</span> Rs.{total} </li>
                                     </ul>
                                 </div>
-                                <ul className="list-unstyled">
-                                    <li>Total: Rs {total} </li>
-                                </ul>
                             </div>
                         </div>
 

@@ -76,6 +76,7 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                         </thead>
                         <tbody>
                             {items.map((item, index) => (
+
                                 <tr key={index}>
                                     <td className="serial">{index + 1}</td>
                                     <td> {/* Barcode input field */}
@@ -116,10 +117,10 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                             <ReactBootstrap.Col lg={6}>
                                 <div className="modal-totals">
                                     <ul className="list-unstyled">
-                                        <li>Subtotal : {subtotal} </li>
-                                        <li>Tax      : </li>
-                                        <li>Shipping : {shipping} </li>
-                                        <li>Discount : {discount}</li>
+                                        <li><span>Subtotal :</span>  {subtotal} </li>
+                                        <li><span>Tax      : </span></li>
+                                        <li><span>Shipping :</span> {shipping} </li>
+                                        <li><span>Discount :</span> {discount}</li>
                                     </ul>
 
                                 </div>
