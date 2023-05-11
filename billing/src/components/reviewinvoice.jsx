@@ -7,7 +7,7 @@ const ReviewInvoice = (props) => {
     const discountchangehandler = (event) => {
         event.preventDefault();
         const givendiscount = event.target.value;
-        props.discounthandler('ItemDiscount', givendiscount);
+        props.discountchangehandler(parseInt(givendiscount));
     }
 
     return (
