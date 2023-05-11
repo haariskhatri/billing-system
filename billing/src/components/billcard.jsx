@@ -3,8 +3,22 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
 
 
-const Billcard = ({ items, handleAddNew, handleChange, handleRemove }) => {
+const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount }) => {
 
+
+    const calculateSubtotal = () => {
+        let subtotal = 0;
+        items.forEach((item) => {
+            const itemQty = parseFloat(item.itemQty) || 0;
+            const itemPrice = parseFloat(item.itemPrice) || 0;
+            subtotal += itemQty * itemPrice;
+        });
+        return subtotal.toFixed(2);
+    };
+
+    const subtotal = calculateSubtotal();
+    const discountgiven = discount || 0;
+    const total = subtotal - discountgiven;
 
 
     // const [items, setItems] = useState([{ itemName: '', itemQty: '', itemPrice: '' }]);
@@ -76,6 +90,8 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove }) => {
                     <table className="table">
                         <thead>
                             <tr>
+                                <th>Serial</th>
+                                <th>Code</th>
                                 <th>Item</th>
                                 <th>Qty</th>
                                 <th>Price</th>
@@ -85,6 +101,16 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove }) => {
                         <tbody>
                             {items.map((item, index) => (
                                 <tr key={index}>
+                                    <td className="serial">{index + 1}</td>
+                                    <td> {/* Barcode input field */}
+                                        <input
+                                            type="text"
+                                            name="barcode"
+                                            value={item.itemBarcode}
+                                            placeholder="Barcode"
+                                            onChange={(event) => handleChange(event, index)}
+                                        />
+                                    </td>
                                     <td className="item-name">
                                         <input
                                             type="text"
@@ -99,17 +125,16 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove }) => {
                                             type="number"
                                             name="itemQty"
                                             value={item.itemQty}
-                                            placeholder="Qty"
-                                            min="0"
+                                            min="1"
                                             onChange={(event) => handleChange(event, index)}
                                         />
                                     </td>
+
                                     <td>
                                         <input
                                             type="number"
                                             name="itemPrice"
                                             value={item.itemPrice}
-                                            placeholder="Price"
                                             onChange={(event) => handleChange(event, index)}
                                         />
                                     </td>
@@ -132,12 +157,13 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove }) => {
                             <div className="subtotal-items">
                                 <div className="subtotal-parts">
                                     <ul className="list-unstyled">
-                                        <li>Subtotal : </li>
+                                        <li>Subtotal : Rs {subtotal} </li>
                                         <li>Tax      : </li>
+                                        <li>Discount : Rs {discountgiven} </li>
                                     </ul>
                                 </div>
                                 <ul className="list-unstyled">
-                                    <li>Total: </li>
+                                    <li>Total: Rs {total} </li>
                                 </ul>
                             </div>
                         </div>
