@@ -75,7 +75,7 @@ function App() {
           <div className="row">
             <div className="col-md-9">
               <div className="date-section">
-                <DateBar invoice={invoice} setinvoice={setinvoice} />
+                <DateBar invoice={invoice + 1} setinvoice={setinvoice} />
                 <AddressBar />
                 <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} discount={discount} shipping={shipping} />
                 <Footer />
@@ -83,7 +83,7 @@ function App() {
             </div>
             <div className="col-md-3 position-relative">
               <div className="review-section">
-                <Modal items={items} shipping={shipping} discount={discount} invoice={invoice + 1} />
+                <Modal items={items} shipping={shipping} discount={discount} invoice={invoice} />
               </div>
               <div className="review-details">
                 <ReviewInvoice discountchangehandler={handlediscountchange} shippingchangehandler={setshipping} />
