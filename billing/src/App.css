@@ -92,6 +92,7 @@ button {
 .bill-top table th {
   padding: 10px;
   vertical-align: middle;
+  text-align: center;
 }
 
 .bill-top table td input {
@@ -112,6 +113,7 @@ button {
   color: #af2222;
   padding: 0;
 }
+
 
 .add-button {
   background-color: rgb(62, 51, 162);
@@ -315,4 +317,8 @@ button {
     margin-top: 0;
     margin-bottom: 0;
   }
+}
+
+.modal-header th {
+  text-align: center;
 }

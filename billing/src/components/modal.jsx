@@ -74,7 +74,7 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                 <ModalBody>
                     <ReactBootstrap.Table>
                         <thead>
-                            <tr>
+                            <tr className='modal-headers'>
                                 <th>Serial</th>
                                 <th>Code</th>
                                 <th>Item</th>
