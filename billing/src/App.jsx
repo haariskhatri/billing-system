@@ -31,6 +31,7 @@ function App() {
   const [shipping, setshipping] = useState(0);
 
 
+
   const handleAddNew = () => {
     const newItem = { itemName: '', itemQty: '', itemPrice: '', itemBarcode: '' };
     setItems(prevItems => [...prevItems, newItem]);

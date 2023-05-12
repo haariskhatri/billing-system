@@ -16,6 +16,8 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
         return subtotal;
     };
 
+
+
     const subtotal = calculateSubtotal();
     const discountgiven = (discount) || 0;
     const shippingamount = (shipping) || 0;
@@ -121,8 +123,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                                         <input
                                             type="text"
                                             name="barcode"
-                                            value={item.itemBarcode}
-                                            placeholder="Barcode"
+                                            value={item.barcode}
                                             onChange={(event) => handleChange(event, index)}
                                         />
                                     </td>
