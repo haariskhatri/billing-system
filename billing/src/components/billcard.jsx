@@ -23,9 +23,15 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
     const shippingamount = (shipping) || 0;
     let total;
     if (parseFloat(discountgiven)) {
-        total = (parseFloat(subtotal) + parseFloat(shippingamount) - parseFloat(discountgiven)).toFixed(2);
+        total = (parseFloat(subtotal) + parseFloat(shippingamount) - parseFloat(discountgiven)).toFixed(2).toLocaleString();
     } else {
         total = (parseFloat(subtotal) + parseFloat(shippingamount)).toFixed(2);
+    }
+
+    total = addCommasToNumber(total);
+
+    function addCommasToNumber(number) {
+        return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(number);
     }
 
     const getamount = (quantity, price) => {
@@ -157,7 +163,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                                     </td>
                                     <td>
                                         {parseFloat(item.itemQty) && parseFloat(item.itemPrice) ? (
-                                            item.itemQty * item.itemPrice
+                                            new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemQty * item.itemPrice)
                                         ) : (
                                             0
                                         )}
@@ -182,13 +188,13 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                             <div className="subtotal-items">
                                 <div className="subtotal-parts">
                                     <ul className="list-unstyled">
-                                        <li><span>Subtotal :</span> Rs.{subtotal} </li>
+                                        <li><span>Subtotal :</span> {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(subtotal)} </li>
                                         <li><span>Tax      :</span> </li>
-                                        <li><span>Shipping :</span> Rs.{shippingamount}</li>
-                                        <li><span>Discount :</span> Rs.{discountgiven} </li>
+                                        <li><span>Shipping :</span> {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(shippingamount)}</li>
+                                        <li><span>Discount :</span> {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(discountgiven)} </li>
                                     </ul>
                                     <ul className="list-unstyled subtotal-total">
-                                        <li><span>Total :</span> Rs.{total} </li>
+                                        <li><span>Total :</span>{total}</li>
                                     </ul>
                                 </div>
                             </div>

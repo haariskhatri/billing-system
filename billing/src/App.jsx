@@ -9,6 +9,7 @@ import Billcard from './components/billcard'
 import Footer from './components/footer'
 import ReviewInvoice from './components/reviewinvoice'
 import Modal from './components/modal'
+import logo from './public/images/logo.png'
 
 function App() {
 
@@ -26,10 +27,14 @@ function App() {
   //   })
   // }
   const [items, setItems] = useState([]);
+  const [biller, setbiller] = useState([{ nameto: '', emailto: '', phoneto: '', addressto: '' }]);
   const [discount, setdiscount] = useState(0);
   const [invoice, setinvoice] = useState(0);
   const [shipping, setshipping] = useState(0);
 
+  function addCommasToNumber(number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(number);
+  }
 
 
   const handleAddNew = () => {
@@ -69,7 +74,9 @@ function App() {
 
   return (
     <>
-
+      <div className="logo">
+        <img src={logo} alt="" />
+      </div>
       <div className="invoice-page">
         <div className="container">
           <Navbar />

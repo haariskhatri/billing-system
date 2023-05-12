@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button, ModalBody, ModalFooter, Container, Row, Col } from 'react-bootstrap';
 import * as ReactBootstrap from 'react-bootstrap';
 
+
 const ScrollableModal = ({ items, shipping, discount, invoice }) => {
     const [showModal, setShowModal] = useState(false);
+
 
     const handleModalClose = () => {
         setShowModal(false);
@@ -12,6 +14,10 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
     const handleModalOpen = () => {
         setShowModal(true);
     };
+
+    const printpdf = () => {
+
+    }
 
     const calculateSubtotal = () => {
         let subtotal = 0;
@@ -26,11 +32,14 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
     const subtotal = calculateSubtotal();
 
     const gettotal = () => {
-        if (discount && subtotal && shipping) {
+        if (discount && shipping) {
             return (parseInt(subtotal) + parseInt(shipping)) - parseInt(discount);
         }
+        else if (subtotal && shipping) {
+            return parseInt(subtotal) + parseInt(shipping)
+        }
         else {
-            return 0;
+            return subtotal;
         }
     }
 
@@ -56,7 +65,7 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                             </Col>
                             <Col lg={6}>
                                 <div className="modal-amount">
-                                    <h6>Amount : {total} </h6>
+                                    <h6>Amount : {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(total)} </h6>
                                 </div>
                             </Col>
                         </Row>
@@ -80,7 +89,7 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                                 <tr key={index}>
                                     <td className="serial">{index + 1}</td>
                                     <td> {/* Barcode input field */}
-                                        {item.itemBarcode}
+                                        {item.barcode}
                                     </td>
                                     <td className="item-name">
                                         {item.itemName}
@@ -90,11 +99,11 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                                     </td>
 
                                     <td>
-                                        {item.itemPrice}
+                                        {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemPrice)}
                                     </td>
-                                    <td>
+                                    <td className='text-end'>
                                         {parseFloat(item.itemQty) && parseFloat(item.itemPrice) ? (
-                                            item.itemQty * item.itemPrice
+                                            new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemQty * item.itemPrice)
                                         ) : (
                                             0
                                         )}
@@ -105,37 +114,35 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
 
                         </tbody>
                     </ReactBootstrap.Table>
-                </ModalBody>
-                <ModalFooter>
+                    <ReactBootstrap.Row>
+                        <ReactBootstrap.Col lg={8}>
 
-                    <ReactBootstrap.Container>
-                        <ReactBootstrap.Row>
-                            <ReactBootstrap.Col lg={6}>
+                        </ReactBootstrap.Col>
 
-                            </ReactBootstrap.Col>
+                        <ReactBootstrap.Col lg={4}>
+                            <div className="modal-totals">
+                                <ul className="list-unstyled">
+                                    <li><span>Subtotal :</span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(subtotal)} </li>
+                                    <li><span>Tax      : </span></li>
+                                    <li><span>Shipping :</span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(shipping)} </li>
+                                    <li><span>Discount :</span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(discount)}</li>
+                                </ul>
 
-                            <ReactBootstrap.Col lg={6}>
-                                <div className="modal-totals">
-                                    <ul className="list-unstyled">
-                                        <li><span>Subtotal :</span>  {subtotal} </li>
-                                        <li><span>Tax      : </span></li>
-                                        <li><span>Shipping :</span> {shipping} </li>
-                                        <li><span>Discount :</span> {discount}</li>
-                                    </ul>
+                                <ul className="list-unstyled modal-final-total">
+                                    <li><span>Total:</span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(total)}</li>
+                                </ul>
+                            </div>
 
-                                </div>
-                                <div className="modal-final-total">
-                                    <ul className="list-unstyled">
-                                        <li>Total: {total}</li>
-                                    </ul>
-                                </div>
-                            </ReactBootstrap.Col>
-                        </ReactBootstrap.Row>
-                    </ReactBootstrap.Container>
-                    <Button variant='primary'>
+                        </ReactBootstrap.Col>
+                    </ReactBootstrap.Row>
+                    <Button variant='primary'
+                        onClick={() => {
+                            window.print()
+                        }}
+                    >
                         Save and Print
                     </Button>
-                </ModalFooter>
+                </ModalBody>
             </Modal>
         </div >
 
