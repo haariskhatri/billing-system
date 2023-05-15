@@ -3,7 +3,7 @@ import { Modal, Button, ModalBody, ModalFooter, Container, Row, Col } from 'reac
 import * as ReactBootstrap from 'react-bootstrap';
 
 
-const ScrollableModal = ({ items, shipping, discount, invoice }) => {
+const ScrollableModal = ({ items, shipping, discount, invoice, biller }) => {
     const [showModal, setShowModal] = useState(false);
 
 
@@ -61,7 +61,12 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                         <Row>
                             <Col lg={6}>
                                 <h6>Invoice Number : {invoice}</h6>
-                                <h6>Haaris Khatri , Minddeft</h6>
+                                <h6>To : {biller.nameto}</h6>
+                                <h6>Phone : {biller.phoneto}</h6>
+                                <h6>Email : {biller.emailto}</h6>
+                                <h6>City : {biller.cityto}</h6>
+                                <h6>Address : {biller.addressto}</h6>
+
                             </Col>
                             <Col lg={6}>
                                 <div className="modal-amount">
@@ -72,48 +77,51 @@ const ScrollableModal = ({ items, shipping, discount, invoice }) => {
                     </Container>
                 </Modal.Header>
                 <ModalBody>
-                    <ReactBootstrap.Table>
-                        <thead>
-                            <tr className='modal-headers'>
-                                <th>Serial</th>
-                                <th>Code</th>
-                                <th>Item</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.map((item, index) => (
+                    <div className="table-responsive">
 
-                                <tr key={index}>
-                                    <td className="serial">{index + 1}</td>
-                                    <td> {/* Barcode input field */}
-                                        {item.barcode}
-                                    </td>
-                                    <td className="item-name">
-                                        {item.itemName}
-                                    </td>
-                                    <td>
-                                        {item.itemQty}
-                                    </td>
-
-                                    <td>
-                                        {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemPrice)}
-                                    </td>
-                                    <td className='text-end'>
-                                        {parseFloat(item.itemQty) && parseFloat(item.itemPrice) ? (
-                                            new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemQty * item.itemPrice)
-                                        ) : (
-                                            0
-                                        )}
-                                    </td>
-
+                        <ReactBootstrap.Table >
+                            <thead>
+                                <tr className='modal-headers'>
+                                    <th>Serial</th>
+                                    <th>Code</th>
+                                    <th>Item</th>
+                                    <th>Qty</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
                                 </tr>
-                            ))}
+                            </thead>
+                            <tbody>
+                                {items.map((item, index) => (
 
-                        </tbody>
-                    </ReactBootstrap.Table>
+                                    <tr key={index}>
+                                        <td className="serial">{index + 1}</td>
+                                        <td> {/* Barcode input field */}
+                                            {item.itemBarcode}
+                                        </td>
+                                        <td className="item-name">
+                                            {item.itemName}
+                                        </td>
+                                        <td>
+                                            {item.itemQty}
+                                        </td>
+
+                                        <td>
+                                            {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemPrice)}
+                                        </td>
+                                        <td className='text-end'>
+                                            {parseFloat(item.itemQty) && parseFloat(item.itemPrice) ? (
+                                                new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemQty * item.itemPrice)
+                                            ) : (
+                                                0
+                                            )}
+                                        </td>
+
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                        </ReactBootstrap.Table>
+                    </div>
                     <ReactBootstrap.Row>
                         <ReactBootstrap.Col lg={8}>
 
