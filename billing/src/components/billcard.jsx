@@ -5,6 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, shipping }) => {
 
+    const [nameerror, setnamerror] = useState(false);
 
     const calculateSubtotal = () => {
         let subtotal = 0;
@@ -43,52 +44,6 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
         }
     }
 
-    // const [items, setItems] = useState([{ itemName: '', itemQty: '', itemPrice: '' }]);
-
-    // const handleChange = (event, index) => {
-    //     const { name, value } = event.target;
-    //     const updatedItems = [...items];
-    //     updatedItems[index][name] = value;
-    //     setItems(updatedItems);
-    // };
-
-    // const handleAddNew = () => {
-    //     const newItem = { itemName: '', itemQty: '', itemPrice: '' };
-    //     setItems([...items, newItem]);
-    // };
-
-    // const handleRemove = (index) => {
-    //     const updatedItems = [...items];
-    //     updatedItems.splice(index, 1);
-    //     setItems(updatedItems);
-    // };
-
-    // const handleRemove = (index) => {
-    //     const updatedItems = [...items];
-    //     updatedItems.splice(index, 1);
-    //     setItems(updatedItems);
-    // };
-
-    // const ItemNameChangeHandler = (event) => {
-    //     const ItemName = event.target.value;
-    //     props.itemchangehandler('ItemName', ItemName);
-    // }
-
-    // const ItemQtyChangeHandler = (event) => {
-    //     const ItemQty = event.target.value;
-    //     props.itemchangehandler('ItemQty', ItemQty);
-    // }
-
-    // const ItemPriceChangeHandler = (event) => {
-    //     const ItemPrice = event.target.value;
-    //     props.itemchangehandler('ItemPrice', ItemPrice);
-    // }
-
-    // const handleAddNew = () => {
-    //     props.AddNewItem();
-    // }
-
-
     return (
         <>
             <div className="bill-board">
@@ -108,77 +63,85 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                             </ul>
                         </div>
                     </div> */}
+                    <div className="table-responsive">
 
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Serial</th>
-                                <th>Code</th>
-                                <th>Item</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Amount</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td> {/* Barcode input field */}
-                                        <input
-                                            type="text"
-                                            name="barcode"
-                                            value={item.barcode}
-                                            onChange={(event) => handleChange(event, index)}
-                                        />
-                                    </td>
-                                    <td className="item-name">
-                                        <input
-                                            type="text"
-                                            name="itemName"
-                                            value={item.itemName}
-                                            onChange={(event) => handleChange(event, index)}
-                                        />
-                                    </td>
-                                    <td>
-                                        <input
-                                            type="number"
-                                            name="itemQty"
-                                            value={item.itemQty}
-                                            min="1"
-                                            placeholder="0"
-                                            onChange={(event) => handleChange(event, index)}
-                                        />
-                                    </td>
-
-                                    <td>
-                                        <input
-                                            type="number"
-                                            name="itemPrice"
-                                            value={item.itemPrice}
-                                            placeholder="0"
-                                            onChange={(event) => handleChange(event, index)}
-                                        />
-                                    </td>
-                                    <td>
-                                        {parseFloat(item.itemQty) && parseFloat(item.itemPrice) ? (
-                                            new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemQty * item.itemPrice)
-                                        ) : (
-                                            0
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        <button onClick={() => handleRemove(index)}>
-                                            <DeleteForeverIcon />
-                                        </button>
-                                    </td>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Serial</th>
+                                    <th>Code</th>
+                                    <th>Item</th>
+                                    <th>Qty</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
                                 </tr>
-                            ))}
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                {items.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td> {/* Barcode input field */}
+                                            <input
+                                                type="text"
+                                                name="itemBarcode"
+                                                value={item.itemBarcode}
+                                                className={item.itemBarcode ? '' : 'input-error'}
+                                                onChange={(event) => handleChange(event, index)}
+                                            />
+                                        </td>
+                                        <td className="item-name">
+                                            <input
+                                                type="text"
+                                                name="itemName"
+                                                value={item.itemName}
+                                                className={item.itemName ? '' : 'input-error'}
+                                                onChange={(event) => { handleChange(event, index) }}
+                                            />
+                                            {item.itemName ? <></> : <p> Can't be empty.</p>}
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                name="itemQty"
+                                                value={item.itemQty}
+                                                min="1"
+                                                placeholder="0"
+                                                className={item.itemQty ? '' : 'input-error'}
+                                                onChange={(event) => handleChange(event, index)}
+                                            />
+                                            {item.itemQty ? <></> : <p>Item Quantity can't be empty.</p>}
+                                        </td>
 
-                    </table>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                name="itemPrice"
+                                                value={item.itemPrice}
+                                                placeholder="0"
+                                                className={item.itemPrice ? '' : 'input-error'}
+                                                onChange={(event) => handleChange(event, index)}
+                                            />
+                                        </td>
+                                        <td>
+                                            {parseFloat(item.itemQty) && parseFloat(item.itemPrice) ? (
+                                                new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(item.itemQty * item.itemPrice)
+                                            ) : (
+                                                0
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            <button onClick={() => handleRemove(index)}>
+                                                <DeleteForeverIcon />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+
+                        </table>
+                    </div>
                     <button onClick={handleAddNew} className="add-button"> Add Item </button>
                 </div>
 
