@@ -40,6 +40,18 @@ function App() {
     setItems(updatedItems);
   };
 
+  const handleproduct = (product, index) => {
+    const { productName, productQty, productPrice, productBarcode } = product.data;
+
+    const updatedItems = [...items];
+    updatedItems[index]["itemName"] = productName;
+    updatedItems[index]["itemQty"] = 1;
+    updatedItems[index]["itemBarcode"] = productBarcode;
+    updatedItems[index]["itemPrice"] = productPrice;
+
+    setItems(updatedItems);
+  }
+
 
   const handleRemove = (index) => {
     setItems(prevItems => prevItems.filter((_, i) => i !== index));
@@ -85,7 +97,7 @@ function App() {
                   biller={biller}
                 />
                 <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} discount={discount} shipping={shipping} itemError={itemerror}
-
+                  handleproduct={handleproduct}
                 />
                 <Footer />
               </div>
