@@ -1,11 +1,8 @@
 import React from "react";
 
-const AddressBar = (props) => {
+const AddressBar = ({ handlebillerchange, biller }) => {
 
-
-
-
-
+    console.log(biller.nameto);
     return (
         <>
             <div className="address-box">
@@ -15,19 +12,23 @@ const AddressBar = (props) => {
                             <h6>Bill To : </h6>
                             <div className="input-group">
                                 <label>To : </label>
-                                <input type="text" name="to" placeholder="Invoice For" />
+                                <input type="text" name="nameto" placeholder="Invoice For" value={biller.nameto} onChange={handlebillerchange} />
                             </div>
                             <div className="input-group">
-                                <label> Email : </label> <input type="email" name="email" placeholder="Email Address " />
+                                <label> Email : </label> <input type="emailto" name="email" placeholder="Email Address " value={biller.emailto} onChange={handlebillerchange} />
                             </div>
 
                             <div className="input-group">
                                 <label>Phone :</label>
-                                <input type="number" name="phonenumber" placeholder="Phone" />
+                                <input type="number" name="phoneto" placeholder="Phone" value={biller.phoneto} onChange={handlebillerchange} />
                             </div>
 
                             <div className="input-group">
-                                <label>Address :</label><textarea name="address" placeholder="Address" />
+                                <label>City : </label><input type="text" name="cityto" placeholder="City" value={biller.cityto} onChange={handlebillerchange} />
+                            </div>
+
+                            <div className="input-group">
+                                <label>Address :</label><textarea name="addressto" placeholder="Address" value={biller.addressto} onChange={handlebillerchange} />
                             </div>
                         </div>
                     </div>
