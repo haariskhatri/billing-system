@@ -367,3 +367,32 @@ input {
 .bill-top table td input.input-error:focus+p {
   display: block;
 }
+
+/* Add Product Form  */
+
+.add-product {
+  padding: 100px 0;
+}
+
+.product-form form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.product-input {
+  display: flex;
+  align-content: center;
+  margin-bottom: 20px;
+}
+
+.product-input label {
+  margin-right: 10px;
+  width: 150px;
+}
+
+.product-input input {
+  flex-grow: 1;
+}

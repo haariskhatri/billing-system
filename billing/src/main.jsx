@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Footer from "./components/footer";
 import App from "./App";
+import AddItem from "./components/addItem";
+import AddProductPage from "./pages/addproductpage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
+  {
+    path: '/addproduct',
+    element: <AddProductPage />
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
