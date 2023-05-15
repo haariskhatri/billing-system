@@ -13,24 +13,13 @@ import logo from './public/images/logo.png'
 
 function App() {
 
-  // const [items, setitems] = useState([]);
 
-  // const handleBillchange = (field, value) => {
-  //   setbill((prevstate) => ({
-  //     ...prevstate, [field]: value
-  //   }))
-  // }
-
-  // const AddNewItem = (item) => {
-  //   setitems((prevstate) => {
-  //     return [...prevstate, item]
-  //   })
-  // }
   const [items, setItems] = useState([]);
-  const [biller, setbiller] = useState([{ nameto: '', emailto: '', phoneto: '', addressto: '' }]);
+  const [biller, setbiller] = useState([{ nameto: '', emailto: '', phoneto: '', cityto: '', addressto: '' }]);
   const [discount, setdiscount] = useState(0);
   const [invoice, setinvoice] = useState(0);
   const [shipping, setshipping] = useState(0);
+  const [itemerror, setitemerror] = useState(false);
 
   function addCommasToNumber(number) {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(number);
@@ -38,7 +27,9 @@ function App() {
 
 
   const handleAddNew = () => {
-    const newItem = { itemName: '', itemQty: '', itemPrice: '', itemBarcode: '' };
+    const newItem = {
+      itemName: '', itemQty: '', itemPrice: '', itemBarcode: ''
+    };
     setItems(prevItems => [...prevItems, newItem]);
   };
 
@@ -49,6 +40,7 @@ function App() {
     setItems(updatedItems);
   };
 
+
   const handleRemove = (index) => {
     setItems(prevItems => prevItems.filter((_, i) => i !== index));
   };
@@ -57,12 +49,16 @@ function App() {
     setdiscount(value);
   }
 
-  const handleinvoicechange = (value) => {
-    setinvoice(value);
-  }
 
-  const modalchangehandler = () => {
-    setmodal(true);
+  const handlebillerchange = (event) => {
+    const { name, value } = event.target;
+
+    console.log(name)
+    console.log(biller.nameto);
+
+    setbiller((prevbiller) => {
+      return { ...prevbiller, [name]: value }
+    })
   }
 
   // const handleItemchange = (field, value) => {
@@ -84,14 +80,21 @@ function App() {
             <div className="col-md-9">
               <div className="date-section">
                 <DateBar invoice={invoice + 1} setinvoice={setinvoice} />
-                <AddressBar />
-                <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} discount={discount} shipping={shipping} />
+                <AddressBar
+                  handlebillerchange={handlebillerchange}
+                  biller={biller}
+                />
+                <Billcard items={items} handleAddNew={handleAddNew} handleRemove={handleRemove} handleChange={handleChange} discount={discount} shipping={shipping} itemError={itemerror}
+
+                />
                 <Footer />
               </div>
             </div>
             <div className="col-md-3 position-relative">
               <div className="review-section">
-                <Modal items={items} shipping={shipping} discount={discount} invoice={invoice} />
+                <Modal items={items} shipping={shipping} discount={discount} invoice={invoice}
+                  biller={biller}
+                />
               </div>
               <div className="review-details">
                 <ReviewInvoice discountchangehandler={handlediscountchange} shippingchangehandler={setshipping} />
