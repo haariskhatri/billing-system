@@ -2,7 +2,7 @@ import React from "react";
 
 const AddressBar = ({ handlebillerchange, biller }) => {
 
-    console.log(biller.nameto);
+
     return (
         <>
             <div className="address-box">
