@@ -1,11 +1,19 @@
 import { React, useState } from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
+import axios from "axios";
 
 
-const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, shipping }) => {
+
+const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, shipping, handleproduct }) => {
 
     const [nameerror, setnamerror] = useState(false);
+
+    const getproduct = async (event, index) => {
+        const barcode = items[index]["itemBarcode"];
+        const product = await axios.get(`http://localhost:4000/getproduct/${barcode}`)
+        handleproduct(product, index);
+    }
 
     const calculateSubtotal = () => {
         let subtotal = 0;
@@ -86,6 +94,9 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                                                 type="text"
                                                 name="itemBarcode"
                                                 value={item.itemBarcode}
+                                                onBlur={(event) => {
+                                                    getproduct(event, index);
+                                                }}
                                                 className={item.itemBarcode ? '' : 'input-error'}
                                                 onChange={(event) => handleChange(event, index)}
                                             />
