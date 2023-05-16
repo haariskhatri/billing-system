@@ -4,6 +4,8 @@ import axios from "axios";
 
 const AddItem = ({ product, handleproductchange, setproduct }) => {
 
+    const [saved, setsaved] = useState(false);
+
     useEffect(() => {
         async function fetchProductID() {
             const id = await axios.get('http://localhost:4000/getproductid');
@@ -16,9 +18,30 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
         fetchProductID();
     }, [])
 
-    const addproduct = () => {
+    const addproduct = async () => {
+        setIsLoading(true); // Set isLoading to true to show the loader
 
-    }
+        try {
+            const data = {
+                productID: product.productID,
+                productName: product.productName,
+                productQty: product.productQty,
+                productPrice: product.productPrice
+            }
+
+            const senddata = await axios.post('http://localhost:4000/addproduct', data);
+            if (senddata) {
+                setsaved(true);
+            } else {
+                setsaved(false);
+            }
+        } catch (error) {
+            console.error('Error saving product:', error);
+        } finally {
+            setIsLoading(false); // Set isLoading to false to hide the loader
+        }
+    };
+
 
 
     return (
