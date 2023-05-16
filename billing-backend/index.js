@@ -4,6 +4,9 @@ const path = require('path')
 const product = require('./product/addproduct');
 const mongoose = require('mongoose');
 const cors = require('cors')
+const counter = require('./product/counter');
+const { log } = require('console');
+const categorymodel = require('./product/categories');
 
 
 const app = express();
@@ -26,20 +29,40 @@ app.post('/addproduct', async (req, res) => {
         productPrice: productPrice
     }).save();
 
+    await counter.findOne(
+        {},
+        { $inc: { product_id: 1 } },
+        { new: true, upsert: true }
+    );
+
 
     res.json({ message: "Succesfully Added" });
 
 })
 
-app.get('/getproductid', (req, res) => {
-    res.json({ result: "0" });
+app.get('/getproductid', async (req, res) => {
+    try {
+        const id = await counter.findOne(
+            {}
+        );
+
+        return res.json({ id: id.product_id });
+    } catch (error) {
+        console.error('Error retrieving and updating product ID:', error);
+    }
 })
 
-app.post('/addproduct', async (req, res) => {
-
-
-    await product()
+app.get('/getcategories', async (req, res) => {
+    try {
+        const categories = await categorymodel.find({})
+        res.send({ categories: categories });
+    }
+    catch (error) {
+        console.log(error);
+    }
 })
+
+
 
 app.get('/getproduct/:barcode', async (req, res) => {
     const { barcode } = req.params;
