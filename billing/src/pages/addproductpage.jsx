@@ -4,20 +4,32 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/navbar";
 import AddItem from "../components/addItem";
 import SideMenu from "../components/sidemenu";
+import { TableRowsTwoTone } from "@mui/icons-material";
 
 
 
 const AddProductPage = () => {
 
     const [product, setproduct] = useState({ productID: '', productName: '', productCategory: '', productQty: '', productPrice: '' })
-
+    const [newcategory, setnewcategory] = useState(false)
 
 
     const handlechange = (event, productID) => {
         const { name, value } = event.target;
-        setproduct((prev) => {
-            return { ...prev, [name]: value };
-        })
+
+        if (value == 'newcategory') {
+            setnewcategory(true);
+        }
+
+        else {
+
+
+
+            setproduct((prev) => {
+                return { ...prev, [name]: value };
+            })
+
+        }
 
     }
 
@@ -31,9 +43,15 @@ const AddProductPage = () => {
                     </div>
                     <div className="col-md-9">
                         <AddItem product={product} handleproductchange={handlechange}
-                            setproduct={setproduct} />
+                            setproduct={setproduct} setnewcategory={setnewcategory}
+                            newcategory={newcategory}
+                        />
+                        { }
+
                     </div>
+
                 </div>
+
             </div>
         </>
     )
