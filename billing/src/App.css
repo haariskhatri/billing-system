@@ -422,7 +422,8 @@ input {
   flex: 1 1 auto;
 }
 
-.product-form form input {
+.product-form form input,
+.product-form form select {
   outline: none;
   line-height: 1.5rem;
   font-size: 0.875rem;
@@ -433,6 +434,13 @@ input {
   border-radius: 0.375rem;
   flex: 1 1 auto;
 }
+
+.product-form form select option {
+  color: white;
+  background-color: #3f4c6b;
+
+}
+
 
 .product-form form input::placeholder {
   color: rgb(216, 212, 212);
