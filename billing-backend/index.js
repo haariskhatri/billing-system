@@ -20,23 +20,26 @@ app.use(cors({
 app.use(express.json());
 
 app.post('/addproduct', async (req, res) => {
-    const { productID, productName, productQty, productPrice } = req.body;
+    const { productID, productName, productQty, productPrice, productCategory } = req.body;
 
     await product({
         productID: productID,
         productName: productName,
+        productCategory: productCategory,
         productQty: productQty,
         productPrice: productPrice
     }).save();
 
-    await counter.findOne(
+    const incrementid = await counter.findOneAndUpdate(
         {},
         { $inc: { product_id: 1 } },
         { new: true, upsert: true }
     );
 
 
+
     res.json({ message: "Succesfully Added" });
+
 
 })
 

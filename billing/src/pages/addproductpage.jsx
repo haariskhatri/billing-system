@@ -9,7 +9,7 @@ import SideMenu from "../components/sidemenu";
 
 const AddProductPage = () => {
 
-    const [product, setproduct] = useState({ productID: '', productName: '', productQty: '', productPrice: '', productCategory: '' })
+    const [product, setproduct] = useState({ productID: '', productName: '', productCategory: '', productQty: '', productPrice: '' })
 
 
 

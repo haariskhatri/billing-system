@@ -6,6 +6,7 @@ import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import LogoutIcon from '@mui/icons-material/Logout';
 import BillingLogo from '../../public/billinglogo.png'
+import CategoryIcon from '@mui/icons-material/Category';
 import { NavLink } from "react-router-dom";
 
 
@@ -33,6 +34,11 @@ const SideMenu = () => {
                     <li>
                         <NavLink to='/addproduct'>
                             <AddToPhotosIcon /> Add Product
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/addcategory'>
+                            <CategoryIcon /> Add Category
                         </NavLink>
                     </li>
                     <li>
