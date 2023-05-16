@@ -108,6 +108,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                                                 value={item.itemName}
                                                 className={item.itemName ? '' : 'input-error'}
                                                 onChange={(event) => { handleChange(event, index) }}
+                                                readOnly
                                             />
                                             {item.itemName ? <></> : <p> Can't be empty.</p>}
                                         </td>
