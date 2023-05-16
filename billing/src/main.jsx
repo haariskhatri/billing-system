@@ -12,6 +12,7 @@ import AddItem from "./components/addItem";
 import AddProductPage from "./pages/addproductpage";
 import SideMenu from "./components/sidemenu";
 import Preloader from "./components/loader";
+import AddCategory from "./components/addcategory";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/addproduct',
     element: <AddProductPage />
+  },
+  {
+    path: '/addcategory',
+    element: <AddCategory />
   }
 ]);
 
