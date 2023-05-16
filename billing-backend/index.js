@@ -17,10 +17,10 @@ app.use(cors({
 app.use(express.json());
 
 app.post('/addproduct', async (req, res) => {
-    const { productName, productBarcode, productQty, productPrice } = req.body;
+    const { productID, productName, productQty, productPrice } = req.body;
 
     await product({
-        productBarcode: productBarcode,
+        productID: productID,
         productName: productName,
         productQty: productQty,
         productPrice: productPrice
@@ -33,6 +33,12 @@ app.post('/addproduct', async (req, res) => {
 
 app.get('/getproductid', (req, res) => {
     res.json({ result: "0" });
+})
+
+app.post('/addproduct', async (req, res) => {
+
+
+    await product()
 })
 
 app.get('/getproduct/:barcode', async (req, res) => {
