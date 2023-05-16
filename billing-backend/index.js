@@ -31,6 +31,10 @@ app.post('/addproduct', async (req, res) => {
 
 })
 
+app.get('/getproductid', (req, res) => {
+    res.json({ result: "0" });
+})
+
 app.get('/getproduct/:barcode', async (req, res) => {
     const { barcode } = req.params;
 

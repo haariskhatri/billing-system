@@ -1,7 +1,26 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 
 
-const AddItem = () => {
+const AddItem = ({ product, handleproductchange, setproduct }) => {
+
+    useEffect(() => {
+        async function fetchProductID() {
+            const id = await axios.get('http://localhost:4000/getproductid');
+            const newid = parseInt(id.data.result) + 1;
+            setproduct((prev) => {
+                return { ...prev, ['productID']: newid }
+            });
+
+        }
+        fetchProductID();
+    }, [])
+
+    const addproduct = () => {
+
+    }
+
+
     return (
         <>
             <div className="add-product">
@@ -15,25 +34,26 @@ const AddItem = () => {
 
                                     <div className="product-input">
                                         <label htmlFor="">Product ID</label>
-                                        <input type="text" placeholder="ID" />
+                                        <input type="text" name="productID"
+                                            value={product.productID} readOnly />
                                     </div>
 
                                     <div className="product-input">
                                         <label htmlFor="">Product Name</label>
-                                        <input type="text" placeholder="Name" />
+                                        <input type="text" name="productName" placeholder="Name" onChange={handleproductchange} value={product.productName} />
                                     </div>
 
                                     <div className="product-input">
                                         <label>Quantity</label>
-                                        <input type="Number" placeholder="Quantity" />
+                                        <input type="Number" name="productQty" placeholder="Quantity" onChange={handleproductchange} value={product.productQty} />
                                     </div>
 
                                     <div className="product-input">
                                         <label>Price</label>
-                                        <input type="Number" placeholder="Price" />
+                                        <input type="Number" name="productPrice" placeholder="Price" onChange={handleproductchange} value={product.productPrice} />
                                     </div>
 
-                                    <button type="submit">Submit</button>
+                                    <button onClick={addproduct}>Submit</button>
                                 </form>
                             </div>
                         </div>

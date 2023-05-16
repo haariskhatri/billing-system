@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 button {
   background-color: transparent;
   border: 0;
@@ -12,7 +16,9 @@ input {
 }
 
 .invoice-page {
-  background-color: #F0F7F6;
+  background: #606c88;
+  background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
+  background: linear-gradient(to right, #3f4c6b, #606c88);
 }
 
 .date-section {
@@ -218,6 +224,7 @@ input {
 .right-panel label {
   margin-top: 20px;
   font-weight: 600;
+  color: white;
 }
 
 .right-panel input {
@@ -241,11 +248,21 @@ input {
   padding: 10px;
   border: 1px solid #0a58ca;
   border-radius: 7px;
-  background-color: #0b5ed7;
-  color: #fff;
+
+
   width: 100%;
   top: 20px;
   margin-bottom: 10px;
+
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.625rem 0.875rem;
+  background-color: rgb(99 102 241);
+
+
+  outline: none;
 }
 
 .modal-body,
@@ -378,14 +395,64 @@ input {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
+
+  background: #606c88;
+  background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
+  background: linear-gradient(to right, #3f4c6b, #606c88);
+  padding: 20px;
+  border-radius: 10px;
+
 }
 
 .product-input {
   display: flex;
-  align-content: center;
+  align-items: center;
   margin-bottom: 20px;
+
+  outline: none;
+  line-height: 1.5rem;
+  font-size: 0.875rem;
+  color: rgb(255 255 255);
+  padding: 0.5rem 0.875rem;
+  background-color: rgb(255 255 255 / 0.05);
+  border: 1px solid rgba(253, 253, 253, 0.363);
+  border-radius: 0.375rem;
+  flex: 1 1 auto;
+}
+
+.product-form form input {
+  outline: none;
+  line-height: 1.5rem;
+  font-size: 0.875rem;
+  color: rgb(255 255 255);
+  padding: 0.5rem 0.875rem;
+  background-color: rgb(255 255 255 / 0.05);
+  border: 1px solid rgba(253, 253, 253, 0.363);
+  border-radius: 0.375rem;
+  flex: 1 1 auto;
+}
+
+.product-form form input::placeholder {
+  color: rgb(216, 212, 212);
+}
+
+
+.product-form form input:focus {
+  border: 1px solid rgb(99 102 241);
+}
+
+.product-form form button {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.625rem 0.875rem;
+  background-color: rgb(99 102 241);
+  border-radius: 0.375rem;
+  border: none;
+  outline: none;
 }
 
 .product-input label {
@@ -395,4 +462,62 @@ input {
 
 .product-input input {
   flex-grow: 1;
+}
+
+
+/* Side Menu  */
+
+.side-menu-container {
+  padding-left: 0;
+  margin-left: 0px;
+  margin-top: 100px;
+  width: 870px;
+
+}
+
+.side-menu-items {
+  padding-left: 0;
+  min-height: 100vh;
+  background: #606c88;
+  background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
+  background: linear-gradient(to right, #3f4c6b, #606c88);
+  position: sticky;
+  top: 0;
+
+}
+
+.side-menu-items ul li a {
+  text-transform: capitalize;
+  padding-top: 10px;
+  color: rgb(216, 212, 212);
+  transition: all 300ms ease-in;
+  padding-left: 16px;
+  text-decoration: none;
+  display: block;
+  padding-bottom: 10px;
+}
+
+.side-menu-items ul li a:hover,
+.side-menu-items ul li a.active {
+  color: #3f4c6b;
+  background-color: white;
+
+}
+
+.side-menu-items ul li svg {
+  margin-right: 10px;
+}
+
+.bill-logo {
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-bottom: 30px;
+}
+
+.logo-name {
+  font-size: 30px;
+  color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
+  text-transform: capitalize;
+  padding-left: 10px;
 }

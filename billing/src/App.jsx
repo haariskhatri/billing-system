@@ -17,6 +17,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [biller, setbiller] = useState([{ nameto: '', emailto: '', phoneto: '', cityto: '', addressto: '' }]);
   const [discount, setdiscount] = useState(0);
+  const [product, setproduct] = useState({ productID: '', productName: '', productQty: '', productPrice: '' });
   const [invoice, setinvoice] = useState(0);
   const [shipping, setshipping] = useState(0);
   const [itemerror, setitemerror] = useState(false);
