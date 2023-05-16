@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
+import Preloader from "./loader";
 
 
 const AddItem = ({ product, handleproductchange, setproduct }) => {
@@ -18,8 +19,9 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
         fetchProductID();
     }, [])
 
-    const addproduct = async () => {
-        setIsLoading(true); // Set isLoading to true to show the loader
+    const addproduct = async (e) => {
+        e.preventDefault();
+        setsaved(true); // Set isLoading to true to show the loader
 
         try {
             const data = {
@@ -30,15 +32,10 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
             }
 
             const senddata = await axios.post('http://localhost:4000/addproduct', data);
-            if (senddata) {
-                setsaved(true);
-            } else {
-                setsaved(false);
-            }
         } catch (error) {
             console.error('Error saving product:', error);
         } finally {
-            setIsLoading(false); // Set isLoading to false to hide the loader
+            setsaved(false);
         }
     };
 
@@ -53,7 +50,7 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
                         <div className="col-lg-12">
                             <div className="product-form">
 
-                                <form>
+                                <form onSubmit={addproduct}>
 
                                     <div className="product-input">
                                         <label htmlFor="">Product ID</label>
@@ -76,13 +73,14 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
                                         <input type="Number" name="productPrice" placeholder="Price" onChange={handleproductchange} value={product.productPrice} />
                                     </div>
 
-                                    <button onClick={addproduct}>Submit</button>
+                                    <button>Submit</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {saved && <Preloader />}
         </>
     )
 }
