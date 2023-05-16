@@ -1,22 +1,39 @@
 import { React, useState, useEffect } from "react";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Preloader from "./loader";
+
 
 
 const AddItem = ({ product, handleproductchange, setproduct }) => {
 
     const [saved, setsaved] = useState(false);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         async function fetchProductID() {
             const id = await axios.get('http://localhost:4000/getproductid');
-            const newid = parseInt(id.data.result) + 1;
+            const newid = parseInt(id.data.id);
             setproduct((prev) => {
                 return { ...prev, ['productID']: newid }
             });
 
         }
+
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/getcategories');
+                console.log(response.data.categories);
+                setCategories(response.data.categories)
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+
+            }
+        };
+
         fetchProductID();
+        fetchCategories();
     }, [])
 
     const addproduct = async (e) => {
@@ -41,6 +58,7 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
 
 
 
+
     return (
         <>
             <div className="add-product">
@@ -60,7 +78,21 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
 
                                     <div className="product-input">
                                         <label htmlFor="">Product Name</label>
-                                        <input type="text" name="productName" placeholder="Name" onChange={handleproductchange} value={product.productName} />
+                                        <input type="text" name="productName" placeholder="Name" onChange={handleproductchange} value={product.productName}
+
+                                        />
+                                    </div>
+
+                                    <div className="product-input">
+                                        <label>Category</label>
+
+                                        <select name="productCategory" value={product.productCategory} onChange={handleproductchange}>
+                                            <option value="">Select Category</option>
+                                            {categories.map((category) => (
+                                                <option key={category._id} value={category.category}>{category.category}</option>
+                                            ))}
+                                        </select>
+
                                     </div>
 
                                     <div className="product-input">
@@ -72,6 +104,7 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
                                         <label>Price</label>
                                         <input type="Number" name="productPrice" placeholder="Price" onChange={handleproductchange} value={product.productPrice} />
                                     </div>
+
 
                                     <button>Submit</button>
                                 </form>
