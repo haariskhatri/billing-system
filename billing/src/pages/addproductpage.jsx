@@ -14,8 +14,6 @@ const AddProductPage = () => {
     const handlechange = (event, productID) => {
         const { name, value } = event.target;
 
-        console.log(value);
-
         setproduct((prev) => {
             return { ...prev, [name]: value };
         })
