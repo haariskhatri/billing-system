@@ -3,10 +3,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Preloader from "./loader";
+import Categorymodal from "./categorymodal";
 
 
 
-const AddItem = ({ product, handleproductchange, setproduct }) => {
+const AddItem = ({ product, handleproductchange, setproduct, newcategory, setnewcategory }) => {
 
     const [saved, setsaved] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -44,28 +45,41 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
 
     const addproduct = async (e) => {
         e.preventDefault();
-        setsaved(true); // Set isLoading to true to show the loader
 
-        try {
-            const data = {
-                productID: product.productID,
-                productName: product.productName,
-                productCategory: product.productCategory,
-                productQty: product.productQty,
-                productPrice: product.productPrice
+        if (product.productName == '' || product.productQty == '' || product.productQty == '0' || product.productPrice == ''
+            || product.productPrice == '0' || product.productQty == '' || product.productQty == '0'
+        ) {
+            toast.error('Fields cannot be Empty')
+        }
+
+        else {
+
+            setsaved(true); // Set isLoading to true to show the loader
+
+            try {
+
+
+
+                const data = {
+                    productID: product.productID,
+                    productName: product.productName,
+                    productCategory: product.productCategory,
+                    productQty: product.productQty,
+                    productPrice: product.productPrice
+                }
+
+                const senddata = await axios.post('http://localhost:4000/addproduct', data);
+                if (senddata) {
+                    toast.success('Product Saved Successfully !')
+                }
+                const reset = await setproduct({ productID: '', productName: '', productCategory: '', productQty: '', productPrice: '' })
+
+            } catch (error) {
+                console.error('Error saving product:', error);
+            } finally {
+                setsaved(false);
+                fetchProductID();
             }
-
-            const senddata = await axios.post('http://localhost:4000/addproduct', data);
-            if (senddata) {
-                toast.success('Product Saved Successfully !')
-            }
-            const reset = await setproduct({ productID: '', productName: '', productCategory: '', productQty: '', productPrice: '' })
-
-        } catch (error) {
-            console.error('Error saving product:', error);
-        } finally {
-            setsaved(false);
-            fetchProductID();
         }
     };
 
@@ -104,6 +118,7 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
                                             {categories.map((category) => (
                                                 <option key={category._id} value={category.category}>{category.category}</option>
                                             ))}
+                                            <option value="newcategory" onChange={handleproductchange}>Add New Category</option>
                                         </select>
 
                                     </div>
@@ -122,6 +137,7 @@ const AddItem = ({ product, handleproductchange, setproduct }) => {
                                     <button>Submit</button>
                                 </form>
                                 <ToastContainer />
+                                {newcategory && <Categorymodal />}
                             </div>
                         </div>
                     </div>
