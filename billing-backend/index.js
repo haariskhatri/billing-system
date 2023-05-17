@@ -7,17 +7,53 @@ const cors = require('cors')
 const counter = require('./product/counter');
 const { log } = require('console');
 const categorymodel = require('./product/categories');
+const { resolveSoa } = require('dns');
 
 
 const app = express();
 const PORT = 4000;
 
-app.use(bodyparser.urlencoded({ extended: false }))
+// app.use(bodyparser.urlencoded({ extended: false }))
+app.use(express.json())
 app.use(cors({
     origin: "*"
 }))
 
 app.use(express.json());
+
+app.post('/checkcategory', async (req, res) => {
+
+
+
+})
+
+app.post('/addcategory', async (req, res) => {
+
+    const { categories } = req.body;
+    const categoriesWithoutSpace = categories.replaceAll(' ', '');
+    console.log(categoriesWithoutSpace);
+    const categorystatus = await categorymodel.findOne({ category: categoriesWithoutSpace });
+
+    if (categorystatus) {
+        res.json({ result: false })
+    }
+    else {
+
+
+        try {
+
+            const addcategory = await categorymodel({ category: categoriesWithoutSpace }).save();
+            if (addcategory) {
+                res.json({ result: true });
+            }
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+})
+
 
 app.post('/addproduct', async (req, res) => {
     const { productID, productName, productQty, productPrice, productCategory } = req.body;
