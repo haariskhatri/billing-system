@@ -451,7 +451,8 @@ input {
   border: 1px solid rgb(99 102 241);
 }
 
-.product-form form button {
+.product-form form button,
+.category-modal-button {
   color: #fff;
   font-weight: 600;
   font-size: 0.875rem;
@@ -671,6 +672,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1056;
 }
 
 @keyframes bounce05 {
@@ -801,4 +803,24 @@ input {
   81% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 12px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
+}
+
+/* Add Category Form  */
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-body form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body form input {
+  border-radius: 10px;
+  border: 1px solid #d2dad8;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
