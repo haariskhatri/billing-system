@@ -5,10 +5,18 @@ const counterschema = new mongoose.Schema({
     product_id: {
         type: Number,
         required: true
+    },
+    barcode_id: {
+        type: Number,
+        required: true
     }
 })
 
+
+
+
 const countermodel = mongoose.model('counters', counterschema);
+
 
 
 module.exports = countermodel;

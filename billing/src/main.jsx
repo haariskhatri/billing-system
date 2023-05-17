@@ -13,6 +13,9 @@ import AddProductPage from "./pages/addproductpage";
 import SideMenu from "./components/sidemenu";
 import Preloader from "./components/loader";
 import AddCategory from "./components/addcategory";
+import BarcodeGenerator from "./components/barcodegenerator";
+import { Dashboard } from "@mui/icons-material";
+import Dashboardpage from "./pages/dashboardpage";
 
 const router = createBrowserRouter([
   {
@@ -28,8 +31,12 @@ const router = createBrowserRouter([
     element: <AddProductPage />
   },
   {
-    path: '/addcategory',
-    element: <AddCategory />
+    path: '/barcode',
+    element: <BarcodeGenerator />
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboardpage />
   }
 ]);
 

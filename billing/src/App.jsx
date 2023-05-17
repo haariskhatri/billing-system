@@ -42,12 +42,12 @@ function App() {
   };
 
   const handleproduct = (product, index) => {
-    const { productName, productQty, productPrice, productBarcode } = product.data;
+    const { productName, productQty, productPrice, productID } = product.data.productdetail;
 
     const updatedItems = [...items];
     updatedItems[index]["itemName"] = productName;
     updatedItems[index]["itemQty"] = 1;
-    updatedItems[index]["itemBarcode"] = productBarcode;
+    updatedItems[index]["itemBarcode"] = productID;
     updatedItems[index]["itemPrice"] = productPrice;
 
     setItems(updatedItems);

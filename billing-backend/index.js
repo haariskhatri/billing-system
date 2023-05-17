@@ -72,10 +72,7 @@ app.post('/addproduct', async (req, res) => {
         { new: true, upsert: true }
     );
 
-
-
     res.json({ message: "Succesfully Added" });
-
 
 })
 
@@ -91,6 +88,20 @@ app.get('/getproductid', async (req, res) => {
     }
 })
 
+app.get('/getbarcodeid', async (req, res) => {
+    try {
+        const id = await counter.findOne(
+            {}
+        );
+
+        return res.json({ id: id.barcode_id });
+    } catch (error) {
+        console.error('Error retrieving and updating product ID:', error);
+    }
+}
+)
+
+
 app.get('/getcategories', async (req, res) => {
     try {
         const categories = await categorymodel.find({})
@@ -105,10 +116,10 @@ app.get('/getcategories', async (req, res) => {
 
 app.get('/getproduct/:barcode', async (req, res) => {
     const { barcode } = req.params;
+    console.log(req.params)
+    const productdetail = await product.findOne({ productID: barcode });
 
-    const productdetail = await product.findOne({ productBarcode: barcode });
-
-    res.json(productdetail)
+    res.json({ productdetail })
 
 })
 
