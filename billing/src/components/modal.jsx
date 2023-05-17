@@ -15,10 +15,6 @@ const ScrollableModal = ({ items, shipping, discount, invoice, biller }) => {
         setShowModal(true);
     };
 
-    const printpdf = () => {
-
-    }
-
     const calculateSubtotal = () => {
         let subtotal = 0;
         items.forEach((item) => {
