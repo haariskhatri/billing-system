@@ -5,20 +5,43 @@ import Navbar from "../components/navbar";
 import AddItem from "../components/addItem";
 import SideMenu from "../components/sidemenu";
 import { TableRowsTwoTone } from "@mui/icons-material";
+import AddCategory from "../components/addcategory";
+import axios from "axios";
+
 
 
 
 const AddProductPage = () => {
 
     const [product, setproduct] = useState({ productID: '', productName: '', productCategory: '', productQty: '', productPrice: '' })
-    const [newcategory, setnewcategory] = useState(false)
+    const [modalstatus, setmodalstatus] = useState(false);
+    const [newcategory, setnewcategory] = useState('');
+    const [categories, setCategories] = useState([]);
+
+
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/getcategories');
+
+            setCategories(response.data.categories)
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+
+        }
+    };
+
+    useEffect(() => {
+        fetchCategories();
+    }, [])
 
 
     const handlechange = (event, productID) => {
         const { name, value } = event.target;
 
-        if (value == 'newcategory') {
-            setnewcategory(true);
+        if (name == 'productCategory' && value == 'newcategory') {
+            setnewcategory(value);
+            setmodalstatus(true);
+            fetchCategories();
         }
 
         else {
@@ -36,7 +59,7 @@ const AddProductPage = () => {
     return (
         <>
             <div className="container-fluids">
-
+                {console.log(categories)}
                 <div className="row">
                     <div className="col-md-3">
                         <SideMenu />
@@ -44,9 +67,9 @@ const AddProductPage = () => {
                     <div className="col-md-9">
                         <AddItem product={product} handleproductchange={handlechange}
                             setproduct={setproduct} setnewcategory={setnewcategory}
-                            newcategory={newcategory}
+                            newcategory={newcategory} setmodalstatus={setmodalstatus} categories={categories} fetchCategories={fetchCategories}
                         />
-                        { }
+                        {modalstatus && <AddCategory setCategories={setCategories} fetchCategories={fetchCategories} modalstatus={modalstatus} setmodalstatus={setmodalstatus} />}
 
                     </div>
 
