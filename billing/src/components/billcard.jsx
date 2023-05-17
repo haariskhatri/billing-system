@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
 import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -12,7 +14,15 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
     const getproduct = async (event, index) => {
         const barcode = items[index]["itemBarcode"];
         const product = await axios.get(`http://localhost:4000/getproduct/${barcode}`)
-        handleproduct(product, index);
+
+        if (product.data.productdetail == null) {
+            toast.error('Product Id Invalid');
+        }
+        else {
+
+            handleproduct(product, index);
+        }
+
     }
 
     const calculateSubtotal = () => {
@@ -99,6 +109,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
                                                 }}
                                                 className={item.itemBarcode ? '' : 'input-error'}
                                                 onChange={(event) => handleChange(event, index)}
+                                                autoFocus
                                             />
                                         </td>
                                         <td className="item-name">
@@ -177,6 +188,7 @@ const Billcard = ({ items, handleAddNew, handleChange, handleRemove, discount, s
 
                     </div>
                 </div>
+                <ToastContainer />
 
             </div >
         </>
