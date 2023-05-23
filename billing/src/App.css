@@ -452,6 +452,7 @@ input {
 }
 
 .product-form form button,
+.delivery-submit-btn,
 .category-modal-button {
   color: #fff;
   font-weight: 600;
@@ -833,4 +834,136 @@ input {
   color: #3f4c6b;
   padding-top: 20px;
   padding-bottom: 30px;
+}
+
+/* Delivery Note */
+
+/* 
+.delivery-note-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 100px auto;
+  border: 1px solid #606c88;
+
+
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.delivery-note-form textarea {
+  width: 700px;
+  height: 300px;
+  padding: 10px;
+  border: 1px solid #606c88;
+  border-radius: 10px;
+
+}
+
+.delivery-input {
+  margin: 20px auto;
+  padding: 10px 10px;
+} */
+
+.delivery-page {
+  padding-top: 100px;
+  padding-right: 25px;
+}
+
+.delivery-page .input-group-text {
+  width: 14%;
+  border-radius: .375rem !important;
+  background: #606c88;
+  background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
+  background: linear-gradient(to right, #3f4c6b, #606c88);
+  color: white;
+}
+
+.delivery-page form label {
+  color: #3f4c6b;
+}
+
+.input-group input {
+  width: 60%;
+}
+
+.delivery-page textarea.form-control {
+  height: 135px;
+}
+
+.form-floating span {
+  top: 45%;
+  position: absolute;
+  left: 12px;
+  transform: translateY(0px);
+}
+
+/* PrintModal */
+
+.print-modal {
+  /* border: 3px solid #000; */
+  outline: 5px solid #fff;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+.modal-content {
+  border: 3px solid #000;
+  border-radius: 10px;
+}
+
+
+.print-modal img {
+  width: 80px;
+}
+
+.company-address {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-top {
+  padding-top: 20px;
+  line-height: 10px;
+}
+
+.address-top p {
+  text-transform: capitalize;
+}
+
+.customer-to {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.dealer-name,
+.customer-name {
+  font-weight: bold;
+}
+
+.modal-header,
+.modal-body {
+  border: 0px;
+}
+
+.modal-body {
+  padding: 10px 25px;
+}
+
+.dealer-detail {
+  border-bottom: 3px solid black;
+}
+
+.modal-body {
+  border-bottom: 2px dashed black;
+}
+
+.customer-detail p {
+  /* line-height: 10px; */
+  margin-bottom: 5px;
+}
+
+.customer-address {
+  white-space: pre;
 }
